@@ -83,6 +83,7 @@ function render(width) {
     var width = width - margin.left - margin.right;
 
     console.log(width);
+    
     var x = d3.scale.ordinal().
         rangeRoundBands([0, width], 0.2),
 
