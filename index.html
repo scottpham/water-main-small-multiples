@@ -83,12 +83,14 @@
             font: 10px sans-serif;
         }
 
-        .y.axis path,
+        .y.axis path {
+            display: none;
+        }
         .y.axis line {
             fill: none;
             stroke: lightgray;
             shape-rendering: crispEdges;
-            display: none;
+            /*display: none;*/
         }
 
         .y.axis line {
@@ -97,9 +99,13 @@
 
         .y.axis .tick {
             fill: gray;
+            stroke: lightgray;
+            stroke-opacity: 0.4;
         }
 
-        .x.axis path,
+        .x.axis path {
+            display: none;
+        }
         .x.axis line {
             shape-rendering: crispEdges;
             stroke: lightgray;
@@ -129,16 +135,12 @@
             fill: gray;
             font-weight: bold;
         }
-
         .bar {
             fill: darkred;
         }
-
         .bar:hover {
             opacity: 0.5;
         }
-
-
         </style>
 </head>
 <body>
@@ -149,13 +151,13 @@
     <div id="graphic"></div>
 
 
-   <!-- <div class="footnotes">
+<!--    <div class="footnotes">
         <h4>Notes</h4>
         <p>Lorem ipsum dolor sit amet, <strong>consectetur adipisicing elit</strong>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
     </div> -->
 
     <div class="footer">
-        <p>Source: DATA SOURCE</a></p>
+        <p>Source: East Bay Municipal Utility District, San Francisco Public Utilities Commission, San Jose Water Company, City of San Jose</p>
         <p>Credit: <a href="http://www.twitter.com/scottpham">Scott Pham</a>/NBC Bay Area</p>
     </div>
 

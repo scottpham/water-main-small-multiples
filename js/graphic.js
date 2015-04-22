@@ -103,7 +103,8 @@ function render(width) {
         .scale(y)
         .ticks(tickNumber)
         .orient("left")
-        .tickSize(5, 0, 0);
+        .tickSize(-width);
+        // .tickSize(5, 0, 0);
 
     //define gridlines
     var make_y_axis = function() { 
@@ -161,8 +162,6 @@ function render(width) {
               .on("mouseover", tip.show)
               .on("mouseout", tip.hide);
 
-
-
         var xAxis = d3.svg.axis()
             .scale(x)
             .tickFormat(function(d,i){
@@ -191,14 +190,14 @@ function render(width) {
             .attr("x", width/2)
             .text(function(d){ return d.key; });
 
-        //attach grid
-        svg.append("g")
-            .attr("class", "grid")
-            .call(make_y_axis()
-                // tickSize(inner, outer)
-                .tickSize((width), 0) //grid lines are actually ticks
-                .tickFormat("")
-            );
+        // //attach grid
+        // svg.append("g")
+        //     .attr("class", "grid")
+        //     .call(make_y_axis()
+        //         // tickSize(inner, outer)
+        //         .tickSize((width), 0) //grid lines are actually ticks
+        //         .tickFormat("")
+        //     );
 
          svg.call(tip);
 
