@@ -98,7 +98,6 @@
         } 
 
         .y.axis .tick {
-            fill: gray;
             stroke: lightgray;
             stroke-opacity: 0.4;
         }
@@ -113,7 +112,7 @@
             display: none;
         }
         .x.axis text {
-            fill: gray;
+           /* fill: black;*/
         }
 
         /*Grid Style*/
@@ -141,11 +140,18 @@
         .bar:hover {
             opacity: 0.5;
         }
+
+        .bartip {
+            font: 12px sans-serif;
+            fill: black;
+            font-weight: bold;
+            text-anchor: "middle";
+        }
         </style>
 </head>
 <body>
     <h1>Leaks per City</h1>
-    <h2>The Investigative Unit requested five years of leaks from major water agencies all over the Bay</h2>
+    <h2>The Investigative Unit requested five years of leak data from major water agencies all over the Bay</h2>
     <!-- <p>FIRST GRAF</p> -->
 
     <div id="graphic"></div>

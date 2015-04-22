@@ -92,7 +92,6 @@ function render(width) {
 
     var format = d3.format("0.2%"); //formats to two decimal places
 
-
     // year format for x ticks
     function year_abb(d){
         var num = d.toString();
@@ -124,8 +123,6 @@ function render(width) {
 
         // http://bl.ocks.org/phoebebright/raw/3176159/
 
-        console.log(data);
-
         // Set domain and range
         // x domain is years
         x.domain([2010, 2011, 2012, 2013, 2014]);
@@ -149,18 +146,58 @@ function render(width) {
             .append("g")
               .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        svg.selectAll(".bars")
-              .data(function(d) {return d.values})
-            .enter().append("rect")
-              .attr("class", "bar")
-              .attr("x", function(d){ 
-                return x(d.year); })
-              .attr("y", function(d){ return y(d.breaks);})
+        var bars = svg.selectAll(".bars")
+              .data(function(d) {return d.values});
+
+        bars.enter().append("rect")
+              .attr("class", function(d,i){ return "bar bar-" + d.year; })
+              .attr("x", function(d){ return x(d.year); })
+              .attr("y", function(d){ return y(d.breaks); })
               .attr("height", function(d){ return (height - y(d.breaks)); })
               .attr("width", x.rangeBand())
-              .attr("opacity", "0.8")
-              .on("mouseover", tip.show)
-              .on("mouseout", tip.hide);
+              .attr("opacity", 1)
+              .on("mouseover", mouseover)
+              .on("mouseout", mouseout);
+
+        // tooltip values
+        bars.enter().append("text")
+            .attr("x", function(d){ return x(d.year) + (x.rangeBand()/2); })
+            .attr("text-anchor", "middle")
+            .attr("y", function(d){ return y(d.breaks) - 10; })
+            .attr("dy", ".35em")
+            .attr("class", function(d){ return "bartip bartip-" + d.year; })
+            .attr("opacity", 0.0)
+            .text(function(d){ return d.breaks; });
+ 
+        function mouseover(d,i){
+            // show tip for this bar
+            // tip.show(d);
+            console.log(x.rangeBand());
+            // highlight all the others
+            svg.selectAll(".bar-" + d.year)
+                .transition()
+                .duration(100)
+                .attr("opacity", 0.5);
+
+            svg.selectAll(".bartip-" + d.year)
+                .transition()
+                .duration(100)
+                .attr("opacity", 1.0);
+        }
+
+        function mouseout(d,i){
+            // tip.hide(d);
+
+            svg.selectAll(".bar-" + d.year)
+                .transition()
+                .duration(100)
+                .attr("opacity", 1.0);
+
+            svg.selectAll(".bartip-" + d.year)
+                .transition()
+                .duration(100)
+                .attr("opacity", 0.0);
+        }
 
         var xAxis = d3.svg.axis()
             .scale(x)
@@ -185,7 +222,6 @@ function render(width) {
             .data(data)
             .attr("class", "label")
             .style("text-anchor", "middle")
-            // .attr("transform", "rotate(-90)")
             .attr("y", -5)
             .attr("x", width/2)
             .text(function(d){ return d.key; });
