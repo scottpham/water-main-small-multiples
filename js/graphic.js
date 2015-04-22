@@ -92,9 +92,12 @@ function render(width) {
 
     var format = d3.format("0.2%"); //formats to two decimal places
 
-    var xAxis = d3.svg.axis()
-        .scale(x)
-        .tickSize(5, 0, 0);
+
+    // year format for x ticks
+    function year_abb(d){
+        var num = d.toString();
+        return num.substring(2,4)
+    }
 
     var yAxis = d3.svg.axis()
         .scale(y)
@@ -106,8 +109,8 @@ function render(width) {
     var make_y_axis = function() { 
         return d3.svg.axis()
             .scale(y)
-                .orient("right")
-                .ticks(tickNumber)
+            .orient("right")
+            .ticks(tickNumber)
             }
 
     // ATTACH THINGS//////
@@ -125,15 +128,13 @@ function render(width) {
         // Set domain and range
         // x domain is years
         x.domain([2010, 2011, 2012, 2013, 2014]);
-        
-        console.log(x.domain());
 
         // y domain for all graphs
         y.domain([0,340]);
 
         //tooltip
         var tip = d3.tip().attr("class", "d3-tip")
-            .html(function(d){ return d.breaks; });
+            .html(function(d){ return d.breaks + " breaks"; });
        
         // // raise up tip by 10px
         // tip.offset([-10, 0])
@@ -159,6 +160,15 @@ function render(width) {
               .attr("opacity", "0.8")
               .on("mouseover", tip.show)
               .on("mouseout", tip.hide);
+
+
+
+        var xAxis = d3.svg.axis()
+            .scale(x)
+            .tickFormat(function(d,i){
+                return '\u2019' + year_abb(d);
+            })
+            .tickSize(5, 0, 0);
 
         //attach x axis
         svg.append("g")
