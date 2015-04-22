@@ -1,4 +1,4 @@
-var mobileThreshold = 300, //set to 500 for testing
+var mobileThreshold = 500, //set to 500 for testing
     aspect_width = 16,
     tickNumber = 5,
     aspect_height = 16;
@@ -57,7 +57,8 @@ $(window).load(function() {
 function draw_graphic(){
     if (Modernizr.svg){
         $graphic.empty();
-        var width = $graphic.width() / 4;
+        var width = 195;
+        // var width = $graphic.width() / 4;
         render(width);
         window.onresize = draw_graphic; //very important! the key to responsiveness
     }
@@ -82,8 +83,8 @@ function render(width) {
     // Subtract margins from width
     var width = width - margin.left - margin.right;
 
-    console.log(width);
-    
+    console.log("width = " + width);
+
     var x = d3.scale.ordinal().
         rangeRoundBands([0, width], 0.2),
 
@@ -137,7 +138,6 @@ function render(width) {
         // // raise up tip by 10px
         // tip.offset([-10, 0])
 
-
         //create svgs for each symbol
         var svg = d3.select("#graphic").selectAll("svg")
                 .data(data)
@@ -165,13 +165,6 @@ function render(width) {
             .attr("class", "x axis")
             .attr("transform", "translate(0," + height + ")")
             .call(xAxis);
-     
-        // x axis label
-        // svg.append("text")
-        //     .attr("class", "label")
-        //     .attr("text-anchor", "middle")
-        //     .attr("transform", "translate(" + width/2 + "," + (height + 40) + ")")
-        //     .text("Fiscal Year");
 
         //attach y axis
         svg.append("g")
