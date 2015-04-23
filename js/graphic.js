@@ -57,7 +57,7 @@ $(window).load(function() {
 function draw_graphic(){
     if (Modernizr.svg){
         $graphic.empty();
-        var width = 150;
+        var width = 180;
         // var width = $graphic.width() / 4;
         render(width);
         window.onresize = draw_graphic; //very important! the key to responsiveness
