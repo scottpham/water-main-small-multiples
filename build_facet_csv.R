@@ -11,6 +11,7 @@ cut_these <- c("PLEASANT HILL",
                "CUPERTINO",
                "LOS ALTOS"
                )
+
 facet <- select(combined, city, year) %>%
     group_by(city,year) %>%
     filter(!(city %in% cut_these)) %>%
@@ -19,10 +20,17 @@ facet <- select(combined, city, year) %>%
     arrange(desc(breaks))
 
 print(facet)
+
+#SAN JOSE CORRECTOR
+go_names <- c(rep("SAN JOSE", 5))
+go_years <- c(2010, 2011, 2012, 2013, 2014)
+go_breaks <- c(6, 7, 12, 22, 21)
+
+
 write.csv(facet,"city_facet.csv", row.names=FALSE)
 
-#Generate a list of cities and agencies for checkup (don't repeat)
-cities <- select(combined, city, agency) %>%
+#Generate a list of cities and agencies for checkup
+cities <- select(combined, everything()) %>%
         group_by(city) %>%
         summarize(agency = unique(agency)) %>%
         arrange(agency)
