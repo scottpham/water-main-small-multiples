@@ -5,9 +5,9 @@ var mobileThreshold = 500, //set to 500 for testing
 
 //standard margins
 var margin = {
-    top: 20,
+    top: 15,
     right: 10,
-    bottom: 50,
+    bottom: 30,
     left: 30
 };
 
