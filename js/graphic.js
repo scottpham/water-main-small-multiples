@@ -1,4 +1,4 @@
-var mobileThreshold = 500, //set to 500 for testing
+var mobileThreshold = 300, //set to 500 for testing
     aspect_width = 16,
     tickNumber = 5,
     aspect_height = 16;
@@ -57,7 +57,7 @@ $(window).load(function() {
 function draw_graphic(){
     if (Modernizr.svg){
         $graphic.empty();
-        var width = 195;
+        var width = 150;
         // var width = $graphic.width() / 4;
         render(width);
         window.onresize = draw_graphic; //very important! the key to responsiveness
