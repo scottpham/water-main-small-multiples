@@ -1,4 +1,4 @@
-var mobileThreshold = 300, //set to 500 for testing
+var mobileThreshold = 450, //set to 500 for testing
     aspect_width = 16,
     tickNumber = 5,
     aspect_height = 16;
@@ -57,26 +57,29 @@ $(window).load(function() {
 function draw_graphic(){
     if (Modernizr.svg){
         $graphic.empty();
-        var width = 180;
-        // var width = $graphic.width() / 4;
-        render(width);
+        // var width = 180;
+        var container_width = $graphic.width();
+        render(container_width);
         window.onresize = draw_graphic; //very important! the key to responsiveness
     }
 }
 
-function render(width) {
+function render(container_width) {
 
     //empty object for storing mobile dependent variables
     var mobile = {};
+    var width;
     //check for mobile
     function ifMobile (w) {
         if(w < mobileThreshold){
+            width = container_width /2;
         }
         else{
+            width = container_width/4;
         }
     } 
     //call mobile check
-    ifMobile(width);
+    ifMobile(container_width);
     //calculate height against container width
     var height = Math.ceil((width * aspect_height) / aspect_width) - margin.top - margin.bottom;
 
@@ -115,7 +118,7 @@ function render(width) {
 
     // ATTACH THINGS//////
 
-    d3.csv("city_facet.csv", helper, function(error, csvs){
+    d3.csv("short_facet.csv", helper, function(error, csvs){
 
         var data = d3.nest()
             .key(function(d){ return d.city; })
