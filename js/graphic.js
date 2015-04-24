@@ -229,15 +229,6 @@ function render(container_width) {
             .attr("x", width/2)
             .text(function(d){ return d.key; });
 
-        // //attach grid
-        // svg.append("g")
-        //     .attr("class", "grid")
-        //     .call(make_y_axis()
-        //         // tickSize(inner, outer)
-        //         .tickSize((width), 0) //grid lines are actually ticks
-        //         .tickFormat("")
-        //     );
-
          svg.call(tip);
 
         } //end inner function
