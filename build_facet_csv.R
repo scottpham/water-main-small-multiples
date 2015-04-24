@@ -38,8 +38,9 @@ short_list <- c("OAKLAND", "SAN FRANCISCO", "SAN JOSE", "BERKELEY")
 short_facet <- select(facet, everything()) %>%
         filter(city %in% short_list) %>%
         group_by(city,year) %>%
-        summarize(breaks = sum(as.numeric(breaks)))
-
+        summarize(breaks = sum(as.numeric(breaks))) %>%
+        ungroup() %>%
+        arrange(desc(breaks))
 
 write.csv(short_facet,"short_facet.csv", row.names=FALSE)
 
